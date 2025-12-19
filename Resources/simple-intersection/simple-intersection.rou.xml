@@ -1,0 +1,30 @@
+<routes>
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="13.9" guiShape="passenger"/>
+
+    <route id="route0" edges="E2C C2W"/>
+    <route id="route1" edges="N2C C2S"/>
+    <route id="route2" edges="W2C C2E"/>
+    <route id="route3" edges="S2C C2N"/>
+    
+    <vehicle id="veh0" type="car" route="route0" depart="0" departLane="best" departSpeed="max" />
+    <vehicle id="veh10" type="car" route="route1" depart="0" departLane="best" departSpeed="max" />
+    <vehicle id="veh20" type="car" route="route2" depart="0" departLane="best" departSpeed="max" />
+    <vehicle id="veh30" type="car" route="route3" depart="0" departLane="best" departSpeed="max" />
+    <vehicle id="veh1" type="car" route="route0" depart="20" departLane="best" departSpeed="max" />
+    <vehicle id="veh11" type="car" route="route1" depart="21" departLane="best" departSpeed="max" />
+    <vehicle id="veh21" type="car" route="route2" depart="22" departLane="best" departSpeed="max" />
+    <vehicle id="veh31" type="car" route="route3" depart="23" departLane="best" departSpeed="max" />
+    <vehicle id="veh2" type="car" route="route0" depart="40" departLane="best" departSpeed="max" />
+    <vehicle id="veh12" type="car" route="route1" depart="41" departLane="best" departSpeed="max" />
+    <vehicle id="veh22" type="car" route="route2" depart="42" departLane="best" departSpeed="max" />
+    <vehicle id="veh32" type="car" route="route3" depart="43" departLane="best" departSpeed="max" />
+    <vehicle id="veh3" type="car" route="route0" depart="60" departLane="best" departSpeed="max" />
+    <vehicle id="veh13" type="car" route="route1" depart="60" departLane="best" departSpeed="max" />
+    <vehicle id="veh23" type="car" route="route2" depart="60" departLane="best" departSpeed="max" />
+    <vehicle id="veh43" type="car" route="route3" depart="60" departLane="best" departSpeed="max" />
+    <vehicle id="veh4" type="car" route="route0" depart="70" departLane="best" departSpeed="max" />
+    <vehicle id="veh14" type="car" route="route1" depart="70" departLane="best" departSpeed="max" />
+    <vehicle id="veh24" type="car" route="route2" depart="70" departLane="best" departSpeed="max" />
+    <vehicle id="veh34" type="car" route="route3" depart="70" departLane="best" departSpeed="max" />
+
+</routes>

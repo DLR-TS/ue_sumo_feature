@@ -1,0 +1,16 @@
+<routes>
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="13.9" guiShape="passenger"/>
+
+    <route id="route0" edges="1to2 2to3 3to4 4to1"/>
+    
+    <vehicle id="veh0" type="car" route="route0" depart="0" departLane="best" departSpeed="max" />
+    <vehicle id="veh1" type="car" route="route0" depart="40" departLane="best" departSpeed="max" />
+    <vehicle id="veh2" type="car" route="route0" depart="80" departLane="best" departSpeed="max" />
+    <vehicle id="veh3" type="car" route="route0" depart="120" departLane="best" departSpeed="max" />
+    <vehicle id="veh4" type="car" route="route0" depart="160" departLane="best" departSpeed="max" />
+    <vehicle id="veh5" type="car" route="route0" depart="200" departLane="best" departSpeed="max" />
+    <vehicle id="veh6" type="car" route="route0" depart="240" departLane="best" departSpeed="max" />
+    <vehicle id="veh7" type="car" route="route0" depart="280" departLane="best" departSpeed="max" />
+    <vehicle id="veh8" type="car" route="route0" depart="320" departLane="best" departSpeed="max" />
+    <vehicle id="veh9" type="car" route="route0" depart="360" departLane="best" departSpeed="max" />
+</routes>
