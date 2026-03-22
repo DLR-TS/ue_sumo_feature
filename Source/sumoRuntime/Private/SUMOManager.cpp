@@ -85,7 +85,7 @@ void ASUMOManager::Configure(TMap<FString, FInnerConfig> Configurations) {
 		UE_LOG(LogTemp, Error, TEXT("sumo: Got multiple configurations."));
 		return;
 	}
-	for (const TPair<FName, FInnerConfig>& Pair : Configurations)
+	for (const TPair<FString, FInnerConfig>& Pair : Configurations)
 	{
 		const FString* valueParameters = Pair.Value.Entries.Find("Parameters");
 		if (valueParameters != nullptr) {
