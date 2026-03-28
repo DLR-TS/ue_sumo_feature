@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.16)
+project(sumo_c_wrapper LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+add_library(sumo_c_wrapper SHARED sumo_c_wrapper.cpp)
+
+target_include_directories(sumo_c_wrapper PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}          # for Include/sumo_wrapper.h
+    /usr/include                         # for libsumo/ headers
+)
+
+target_link_libraries(sumo_c_wrapper PRIVATE
+    tracicpp                             # libtracicpp.so (system)
+)
+
+# Set visibility to hidden by default, SUMO_API marks exports
+set_target_properties(sumo_c_wrapper PROPERTIES
+    CXX_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN ON
+)

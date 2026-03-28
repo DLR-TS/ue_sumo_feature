@@ -1,0 +1,250 @@
+// sumo_c_wrapper.cpp — C wrapper around libTraCI for use from Unreal Engine
+// Implements the API declared in Include/sumo_wrapper.h
+
+#define LIBTRACI 1
+#include <libsumo/libtraci.h>
+#include "Include/sumo_wrapper.h"
+
+#include <string>
+#include <vector>
+#include <cstring>
+#include <cstdio>
+
+static std::string last_error;
+
+static std::vector<std::string> vehicle_ids_store;
+static std::vector<const char*> vehicle_ids_cstr;
+
+static std::vector<std::string> person_ids_store;
+static std::vector<const char*> person_ids_cstr;
+
+static std::vector<std::string> tl_ids_store;
+static std::vector<const char*> tl_ids_cstr;
+
+static std::vector<std::string> tl_states_store;
+static std::vector<const char*> tl_states_cstr;
+
+static std::vector<std::string> lane_ids_store;
+static std::vector<const char*> lane_ids_cstr;
+
+// Helper: copy std::string into a fixed-size char buffer
+static void copy_to_buf(char* dst, const std::string& src, size_t max_len) {
+    std::strncpy(dst, src.c_str(), max_len - 1);
+    dst[max_len - 1] = '\0';
+}
+
+// Helper: convert vector<string> to vector<const char*>
+static void to_cstr_vec(const std::vector<std::string>& src,
+                        std::vector<std::string>& store,
+                        std::vector<const char*>& cstr) {
+    store = src;
+    cstr.clear();
+    cstr.reserve(store.size());
+    for (auto& s : store) {
+        cstr.push_back(s.c_str());
+    }
+}
+
+extern "C" {
+
+SUMO_API int sumo_load_with_paramenters(const char* params[]) {
+    try {
+        std::vector<std::string> args;
+        args.push_back("sumo");  // Simulation::start() expects argv[0] = executable
+        if (params != nullptr) {
+            for (int i = 0; params[i] != nullptr; ++i) {
+                args.push_back(params[i]);
+            }
+        }
+        // If first user param is not a flag, treat it as a config file path
+        if (args.size() >= 2 && !args[1].empty() && args[1][0] != '-') {
+            args.insert(args.begin() + 1, "-c");
+        }
+        // Start SUMO as a subprocess via libTraCI
+        libtraci::Simulation::start(args);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_load_with_step_length(const char* config_file, float step_length) {
+    try {
+        std::vector<std::string> args = {
+            "sumo", "-c", config_file,
+            "--step-length", std::to_string(step_length)
+        };
+        libtraci::Simulation::start(args);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_load(const char* config_file) {
+    try {
+        std::vector<std::string> args = { "sumo", "-c", config_file };
+        libtraci::Simulation::start(args);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_close(void) {
+    try {
+        libtraci::Simulation::close();
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_step(const float target_time) {
+    try {
+        libtraci::Simulation::step((double)target_time);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API double sumo_get_time(void) {
+    try {
+        return libtraci::Simulation::getTime();
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1.0;
+    }
+}
+
+SUMO_API int sumo_get_vehicle_ids(const char*** vehicleIds) {
+    try {
+        to_cstr_vec(libtraci::Vehicle::getIDList(), vehicle_ids_store, vehicle_ids_cstr);
+        *vehicleIds = vehicle_ids_cstr.data();
+        return (int)vehicle_ids_cstr.size();
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        *vehicleIds = nullptr;
+        return 0;
+    }
+}
+
+SUMO_API int sumo_get_vehicle_info(const char* vid, struct vehicle_info* vinfo) {
+    try {
+        std::string id(vid);
+        copy_to_buf(vinfo->id, id, STRING_LEN);
+        copy_to_buf(vinfo->type, libtraci::Vehicle::getTypeID(id), STRING_LEN);
+        copy_to_buf(vinfo->vclass, libtraci::Vehicle::getVehicleClass(id), STRING_LEN);
+
+        libsumo::TraCIPosition pos = libtraci::Vehicle::getPosition3D(id);
+        vinfo->x = pos.x;
+        vinfo->y = pos.y;
+        vinfo->z = pos.z;
+        vinfo->angle = libtraci::Vehicle::getAngle(id);
+        vinfo->accel = libtraci::Vehicle::getAcceleration(id);
+        vinfo->speed = libtraci::Vehicle::getSpeed(id);
+        vinfo->signals = libtraci::Vehicle::getSignals(id);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_get_vehicle_dimension(const char* vid, double* l, double* w, double* h) {
+    try {
+        std::string id(vid);
+        std::string typeID = libtraci::Vehicle::getTypeID(id);
+        *l = libtraci::VehicleType::getLength(typeID);
+        *w = libtraci::VehicleType::getWidth(typeID);
+        *h = libtraci::VehicleType::getHeight(typeID);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_get_persons(const char*** persons) {
+    try {
+        to_cstr_vec(libtraci::Person::getIDList(), person_ids_store, person_ids_cstr);
+        *persons = person_ids_cstr.data();
+        return (int)person_ids_cstr.size();
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        *persons = nullptr;
+        return 0;
+    }
+}
+
+SUMO_API int sumo_get_person_info(const char* pid, struct person_info* pinfo) {
+    try {
+        std::string id(pid);
+        copy_to_buf(pinfo->id, id, STRING_LEN);
+
+        libsumo::TraCIPosition pos = libtraci::Person::getPosition3D(id);
+        pinfo->x = pos.x;
+        pinfo->y = pos.y;
+        pinfo->z = pos.z;
+        pinfo->angle = libtraci::Person::getAngle(id);
+        pinfo->speed = libtraci::Person::getSpeed(id);
+        return 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return -1;
+    }
+}
+
+SUMO_API int sumo_get_trafficlights(const char*** tlIds, const char*** tlstates) {
+    try {
+        auto ids = libtraci::TrafficLight::getIDList();
+        std::vector<std::string> states;
+        states.reserve(ids.size());
+        for (auto& id : ids) {
+            states.push_back(libtraci::TrafficLight::getRedYellowGreenState(id));
+        }
+        to_cstr_vec(ids, tl_ids_store, tl_ids_cstr);
+        to_cstr_vec(states, tl_states_store, tl_states_cstr);
+        *tlIds = tl_ids_cstr.data();
+        *tlstates = tl_states_cstr.data();
+        return (int)tl_ids_cstr.size();
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        *tlIds = nullptr;
+        *tlstates = nullptr;
+        return 0;
+    }
+}
+
+SUMO_API int sumo_get_lanes(const char*** lanes) {
+    try {
+        to_cstr_vec(libtraci::Lane::getIDList(), lane_ids_store, lane_ids_cstr);
+        *lanes = lane_ids_cstr.data();
+        return (int)lane_ids_cstr.size();
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        *lanes = nullptr;
+        return 0;
+    }
+}
+
+SUMO_API int sumo_get_is_done(void) {
+    try {
+        return libtraci::Simulation::getMinExpectedNumber() > 0 ? 1 : 0;
+    } catch (const std::exception& e) {
+        last_error = e.what();
+        return 0;
+    }
+}
+
+SUMO_API const char* sumo_get_last_error(void) {
+    return last_error.c_str();
+}
+
+} // extern "C"

@@ -51,7 +51,14 @@ public class sumoRuntime : ModuleRules
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Linux)
 		{
+			// sumo_c_wrapper shared library (built from source)
+			PublicAdditionalLibraries.Add(Path.Combine(sumoLibPath, "libsumo_c_wrapper.so"));
+			RuntimeDependencies.Add(
+				Path.Combine("$(PluginDir)", "Binaries", "Linux", "libsumo_c_wrapper.so"),
+				Path.Combine(sumoLibPath, "libsumo_c_wrapper.so"),
+				StagedFileType.NonUFS);
 
+			// libtracicpp.so is a transitive dependency loaded at runtime via libsumo_c_wrapper.so
 		}
 		PublicIncludePaths.AddRange(
 			new string[] {
