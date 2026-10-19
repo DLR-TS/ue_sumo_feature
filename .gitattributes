@@ -4,3 +4,9 @@
 *.xodr filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
 *.dll filter=lfs diff=lfs merge=lfs -text
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/* filter=lfs diff=lfs merge=lfs -text
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/libicu*.so -filter
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/libicu*.so.70 -filter
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/libxerces-c.so -filter
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/libz.so -filter
+Source/ue_sumo_featureRuntime/ThirdParty/sumo/Lib/libz.so.1 -filter

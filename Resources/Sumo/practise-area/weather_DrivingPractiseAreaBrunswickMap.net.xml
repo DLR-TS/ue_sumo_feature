@@ -1,0 +1,20 @@
+<Environment name="HeavyRainNight">
+
+    <TimeOfDay
+        animation="false"
+        dateTime="2026-11-15T22:30:00"/>
+
+    <Weather
+        temperature="281.15"
+        atmosphericPressure="100400"
+        fractionalCloudCover="nineOktas">
+
+        <Fog visualRange="30"/>
+
+        <Precipitation
+            precipitationType="rain"
+            precipitationIntensity="50.0"/>
+
+    </Weather>
+
+</Environment>

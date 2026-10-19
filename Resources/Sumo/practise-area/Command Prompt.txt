@@ -1,0 +1,10 @@
+Road network:
+
+netconvert --opendrive-files DrivingPractiseAreaBrunswickMap.xodr --offset.disable-normalization true --proj.rotate 270 --flatten --offset.y -13 --offset.x 26 -o DrivingPractiseAreaBrunswickMap.net.xml
+
+Manually added pedestrian paths in sumo neteditor
+
+Routes:
+
+Created random trips via duarouter
+Manually added pedestrians and vehicle types

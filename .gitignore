@@ -69,3 +69,8 @@ DerivedDataCache/*
 
 # Manual Test
 Resources/tripinfo.xml
+
+# SUMO manual build on windows
+.sumo-build
+
+*.h text eol=crlf

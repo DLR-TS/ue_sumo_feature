@@ -1,32 +1,36 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "1.0",
+	"VersionName": "2.0",
 	"FriendlyName": "ue_sumo_feature",
-	"Description": "SUMO Version 1.22",
+	"Description": "SUMO Version 1.27.1",
 	"Category": "Game Features",
 	"CreatedBy": "DLR-TS",
 	"CreatedByURL": "https://www.dlr.de/en/ts",
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
-	"EnabledByDefault": false,
+	"EnabledByDefault": true,
 	"CanContainContent": true,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "sumoRuntime",
+			"Name": "ue_sumo_featureRuntime",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
 	],
 	"ExplicitlyLoaded": true,
-	"BuiltInInitialFeatureState": "Active",
+	"BuiltInInitialFeatureState": "Registered",
 	"Plugins": [
 		{
 			"Name": "GEMSTAR_Interfaces",
+			"Enabled": true
+		},
+		{
+			"Name": "GameFeatures",
 			"Enabled": true
 		}
 	]

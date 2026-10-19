@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-09-21 15:27:55.833216 by Eclipse SUMO randomTrips.py v1_27_1+0000-7717f2379d9
+<configuration>
+    <net-file value="DrivingPractiseAreaBrunswickMap.net.xml"/>
+    <route-file value="random.rou.xml"/>
+    <end value="20.0"/>
+    <period value="1.0"/>
+</configuration>
+-->
+
+<!-- generated on 2026-09-21T15:27:55.746218+01:00 by Eclipse SUMO duarouter 1.27.1
+<duarouterConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
+
+    <input>
+        <net-file value="DrivingPractiseAreaBrunswickMap.net.xml"/>
+        <route-files value="trips.trips.xml"/>
+    </input>
+
+    <output>
+        <output-file value="random.rou.xml"/>
+        <alternatives-output value="NUL"/>
+    </output>
+
+    <processing>
+        <routing-threads value="10"/>
+    </processing>
+
+    <time>
+        <begin value="0"/>
+        <end value="20.0"/>
+    </time>
+
+    <report>
+        <no-warnings value="true"/>
+        <ignore-errors value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+</duarouterConfiguration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+	<vType id="pedestrian"
+        vClass="pedestrian"
+        maxSpeed="1.4"/>
+
+    <person id="male0"
+            type="pedestrian"
+            depart="0">
+        <walk from="178"
+              to="178"
+              arrivalPos="-1"/>
+    </person>
+	<person id="male1"
+            type="pedestrian"
+            depart="0">
+		<walk edges="54 -34 164 -45 54 -34 164 -45 54"
+			  arrivalPos="-1"/>
+    </person>
+	<person id="female0"
+            type="pedestrian"
+            depart="0">
+		<walk edges="-34 164 -45 54 -34 164 -45 54 -34"
+			  arrivalPos="-1"/>
+    </person>
+	<person id="child0"
+            type="pedestrian"
+            depart="0">
+		<walk edges="164 -45 54 -34 164 -45 54 -34 164"
+			  arrivalPos="-1"/>
+    </person>
+	<person id="male2"
+            type="pedestrian"
+            depart="0">
+		<walk edges="37 -161 152 -40 37 -161 152 -40 37 -161"
+			  arrivalPos="-1"/>
+    </person>
+	<person id="female1"
+            type="pedestrian"
+            depart="0">
+		<walk edges="-161 152 -40 37 -161 152 -40 37 -161"
+			  arrivalPos="-1"/>
+    </person>
+	<person id="child1"
+            type="pedestrian"
+            depart="0">
+		<walk edges="152 -40 37 -161 152 -40 37 -161 152 -40"
+			  arrivalPos="-1"/>
+    </person>
+	<vType id="car" vClass="passenger"/>
+	<vType id="truck" vClass="truck"/>
+	<vType id="bus" vClass="bus"/>
+	<vType id="private" vClass="private"/>
+    <vehicle id="0" type="car" depart="0.00">
+        <route edges="158 -45 131 674 -143 -140"/>
+    </vehicle>
+    <vehicle id="1" type="truck" depart="1.00">
+        <route edges="-27#2 -27#3 -6 178 146 152 -161 37 149 -178"/>
+    </vehicle>
+    <vehicle id="2" type="bus" depart="2.00">
+        <route edges="23 161"/>
+    </vehicle>
+    <vehicle id="3" type="private" depart="3.00">
+        <route edges="54 -158 59 -40 -146 -149"/>
+    </vehicle>
+    <vehicle id="4" type="car" depart="4.00">
+        <route edges="-6 178 146 152 155 -140"/>
+    </vehicle>
+    <vehicle id="5" type="truck" depart="5.00">
+        <route edges="-178 6 27#3 27#2 27#1 27#0 -146 -149 -59 158 -54 42 -80"/>
+    </vehicle>
+    <vehicle id="6" type="bus" depart="6.00">
+        <route edges="-140 -85 45 -158 -175"/>
+    </vehicle>
+    <vehicle id="7" type="private" depart="7.00">
+        <route edges="161 155 143 -674 -131 85 140"/>
+    </vehicle>
+    <vehicle id="8" type="car" depart="8.00">
+        <route edges="-178 6 27#3 27#2 27#1 27#0 152 155 143"/>
+    </vehicle>
+    <vehicle id="9" type="truck" depart="9.00">
+        <route edges="34 -164 85 140 143 -674 -131"/>
+    </vehicle>
+    <vehicle id="10" type="bus" depart="10.00">
+        <route edges="27#3 27#2 27#1 27#0 152 -161 -23 -674 -131 164"/>
+    </vehicle>
+    <vehicle id="11" type="private" depart="11.00">
+        <route edges="-40 152 -161"/>
+    </vehicle>
+    <vehicle id="12" type="car" depart="12.00">
+        <route edges="8 178 -149 -59 -175 -131 164 -34"/>
+    </vehicle>
+    <vehicle id="13" type="truck" depart="13.00">
+        <route edges="-149"/>
+    </vehicle>
+    <vehicle id="14" type="bus" depart="14.00">
+        <route edges="40 149 146"/>
+    </vehicle>
+    <vehicle id="15" type="private" depart="15.00">
+        <route edges="34 -164 131 674 23 161 -152 -27#0 -27#1 -27#2 -27#3 -6 178"/>
+    </vehicle>
+    <vehicle id="16" type="car" depart="16.00">
+        <route edges="1428 80"/>
+    </vehicle>
+    <vehicle id="17" type="truck" depart="17.00">
+        <route edges="-45 85 140"/>
+    </vehicle>
+    <vehicle id="18" type="bus" depart="18.00">
+        <route edges="37 149"/>
+    </vehicle>
+    <vehicle id="19" type="private" depart="19.00">
+        <route edges="42 1428 169 -164 85 140 143"/>
+    </vehicle>
+</routes>

@@ -1,0 +1,11 @@
+<configuration>
+    <input>
+        <net-file value="DrivingPractiseAreaBrunswickMap.net.xml"/>
+        <route-files value="DrivingPractiseAreaBrunswickMap.rou.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="100"/>
+        <step-length value="0.05"/>
+    </time>
+</configuration>
