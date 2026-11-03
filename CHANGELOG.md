@@ -1,6 +1,14 @@
 # Changelog
 
-## [2.0]
+## 2.0.1
+
+### Fixed
+
+- fixed test map behavior
+
+- catch file copy failure
+
+## 2.0
 
 ### Added
 
@@ -28,9 +36,3 @@
 - add pedestrians to scenario
 
 - changed PROVIDER_NAME to ue_sumo_feature
-
-
-### Fixed
-
-
-

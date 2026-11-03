@@ -190,11 +190,14 @@ public class ue_sumo_featureRuntime : ModuleRules
 			// Never overwrite user-modified files.
 			if (!File.Exists(DestinationFile))
 			{
-				File.Copy(
-					SourceFile,
-					DestinationFile,
-					false
-				);
+				try
+				{
+					File.Copy(SourceFile, DestinationFile, false);
+				}
+				catch (IOException) when (File.Exists(DestinationFile))
+				{
+					// other thread was faster - ok
+				}
 			}
 		}
 	}

@@ -9,6 +9,7 @@
  */
 
 #include "SUMOTester.h"
+#include "SUMOLog.h"
 
 #include "EngineUtils.h"
 
@@ -34,10 +35,9 @@ void ASUMOTester::Tick(float DeltaTime)
 	if (!IsValid(sumoManager))
 	{
 
-		for (TActorIterator<ASUMOManager> It(GetWorld()); It; ++It)
+		if (TActorIterator<ASUMOManager> It(GetWorld()); It)
 		{
 			sumoManager = *It;
-			break;
 		}
 	}
 
