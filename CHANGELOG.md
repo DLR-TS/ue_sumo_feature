@@ -4,9 +4,11 @@
 
 ### Fixed
 
-- fixed test map behavior
+- Uploaded .so files from linux system to fix linux build
 
-- catch file copy failure
+- Fixed test map behavior
+
+- Catch file copy failure
 
 ## 2.0
 
