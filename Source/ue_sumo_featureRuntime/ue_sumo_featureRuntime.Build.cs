@@ -146,7 +146,7 @@ public class ue_sumo_featureRuntime : ModuleRules
 		);
 	}
 
-	private static void CopyDirectoryIfMissing(
+	private void CopyDirectoryIfMissing(
 		string SourceDir,
 		string DestinationDir)
 	{
@@ -199,6 +199,7 @@ public class ue_sumo_featureRuntime : ModuleRules
 					// other thread was faster - ok
 				}
 			}
+            RuntimeDependencies.Add(DestinationFile, StagedFileType.NonUFS);
 		}
 	}
 

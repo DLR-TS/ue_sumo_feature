@@ -12,6 +12,8 @@
 
 - Fix shipping logging error
 
+- Shipping dependencies
+
 ## 2.0
 
 ### Added
