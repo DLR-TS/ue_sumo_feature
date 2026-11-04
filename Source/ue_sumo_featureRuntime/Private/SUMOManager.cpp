@@ -178,7 +178,10 @@ void ASUMOManager::Configure(TMap<FString, FInnerConfig> Configurations, UGemsta
 		if (Debug != nullptr)
 		{
 			bDebugLogging = *Debug == "true" ? true : false;
+			// When NO_LOGGING is set (e.g. Shipping), the category is an FNoLoggingCategory.
+#if !NO_LOGGING
 			Sumo.SetVerbosity(bDebugLogging ? ELogVerbosity::Verbose : ELogVerbosity::Log);
+#endif
 		}
 		Mode = ESumoMode::Configured;
 	}
