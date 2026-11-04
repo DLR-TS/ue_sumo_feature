@@ -10,6 +10,8 @@
 
 - Catch file copy failure
 
+- Fix shipping logging error
+
 ## 2.0
 
 ### Added
